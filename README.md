@@ -12,7 +12,7 @@ This repository contains everything you need to replicate a robust **Healthcare 
 | `healthcare_model.yaml` | Semantic Model for all structured tables (Patients, Claims, Providers, etc.). |
 | `SETUP_GUIDE (Google Doc)` | Step-by-step instructions to replicate everything, with a link to download source data (CSVs + PDFs). |
 | [Google Drive Link](https://drive.google.com/drive/folders/1A_LEZSHNRxnrQjALUUxBt6UNRcA8HuoL?usp=sharing) | 🔗 _Link to raw CSVs and PDF files._ |
-| [Google Docs Setup] (https://docs.google.com/document/d/1EPALUMAs09QMu76wJCuXhoLN7R2uebQWjXSeMieWyHA/edit?usp=sharing) | 🔗 _Link to instructions._
+| [Google Docs Setup] (https://docs.google.com/document/d/1EPALUMAs09QMu76wJCuXhoLN7R2uebQWjXSeMieWyHA/edit?usp=sharing) | 🔗 _Link to instructions._ |
 
 ---
 
