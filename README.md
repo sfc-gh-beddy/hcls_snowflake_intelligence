@@ -11,7 +11,7 @@ This repository contains everything you need to replicate a robust **Healthcare 
 | `notebooks/Cortex_Search_Minimal.ipynb` | Clean, minimal notebook to parse PDFs, split into chunks, and create a Cortex Search Service. |
 | `semantic_models/healthcare_data.yaml` | Semantic Model for all structured tables (Patients, Claims, Providers, etc.). |
 | `SETUP_GUIDE (Google Doc)` | Step-by-step instructions to replicate everything, with a link to download source data (CSVs + PDFs). |
-| [Google Drive Link](https://drive.google.com/drive/folders/1A_LEZSHNRxnrQjALUUxBt6UNRcA8HuoL?usp=sharing) | 🔗 _Link to raw CSVs and PDF files._  _(Replace with actual link)_ |
+| [Google Drive Link](https://drive.google.com/drive/folders/1A_LEZSHNRxnrQjALUUxBt6UNRcA8HuoL?usp=sharing) | 🔗 _Link to raw CSVs and PDF files._ |
 
 ---
 
