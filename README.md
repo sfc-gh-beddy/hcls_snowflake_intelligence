@@ -8,10 +8,11 @@ This repository contains everything you need to replicate a robust **Healthcare 
 
 | File | Description |
 | ---- | ------------ |
-| `notebooks/Cortex_Search_Minimal.ipynb` | Clean, minimal notebook to parse PDFs, split into chunks, and create a Cortex Search Service. |
-| `semantic_models/healthcare_data.yaml` | Semantic Model for all structured tables (Patients, Claims, Providers, etc.). |
+| `healthcare_cortex_search.ipynb` | Clean, minimal notebook to parse PDFs, split into chunks, and create a Cortex Search Service. |
+| `healthcare_model.yaml` | Semantic Model for all structured tables (Patients, Claims, Providers, etc.). |
 | `SETUP_GUIDE (Google Doc)` | Step-by-step instructions to replicate everything, with a link to download source data (CSVs + PDFs). |
 | [Google Drive Link](https://drive.google.com/drive/folders/1A_LEZSHNRxnrQjALUUxBt6UNRcA8HuoL?usp=sharing) | 🔗 _Link to raw CSVs and PDF files._ |
+| [Google Docs Setup] (https://docs.google.com/document/d/1EPALUMAs09QMu76wJCuXhoLN7R2uebQWjXSeMieWyHA/edit?usp=sharing) | 🔗 _Link to instructions._
 
 ---
 
@@ -21,8 +22,8 @@ This repository contains everything you need to replicate a robust **Healthcare 
 
 Download the **CSVs and claim PDFs** from the provided [Google Drive folder]([#](https://drive.google.com/drive/folders/1A_LEZSHNRxnrQjALUUxBt6UNRcA8HuoL?usp=sharing)).  
 This includes:
-- `/CSVs` → `patients.csv`, `claims.csv`, `providers.csv`, `appointments.csv`, `prescriptions.csv`
-- `/PDFs` → `claim_1.pdf`, `claim_2.pdf`, etc.
+- `patients.csv`, `claims.csv`, `providers.csv`, `appointments.csv`, `prescriptions.csv`
+- `/pdfs` → `claim_1.pdf`, `claim_2.pdf`, etc.
 
 ---
 
@@ -35,7 +36,7 @@ This includes:
 
 ### 3️⃣ **Run the Notebook**
 
-Open `notebooks/Cortex_Search_Minimal.ipynb` in Snowsight **or** your preferred IDE:
+Open `healthcare_crotex_search.ipynb` in Snowsight **or** your preferred IDE:
 
 - Parse PDFs into text.
 - Split text into chunks.
@@ -46,7 +47,7 @@ Open `notebooks/Cortex_Search_Minimal.ipynb` in Snowsight **or** your preferred 
 
 ### 4️⃣ **Register the Semantic Model**
 
-Go to Snowsight → **Semantic Models** → upload `semantic_models/healthcare_data.yaml`.
+Go to Snowsight → **Semantic Models** → upload `healthcare_data.yaml`.
 
 This connects your structured healthcare data to Cortex.
 
