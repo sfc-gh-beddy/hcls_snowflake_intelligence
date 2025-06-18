@@ -1,0 +1,867 @@
+name: healthcare_data
+description: This has information on payer/provider/patient data. Including structured and unstructured data.
+tables:
+  - name: APPOINTMENTS
+    base_table:
+      database: HEALTHCARE_DEMO_DB
+      schema: PUBLIC
+      table: APPOINTMENTS
+    dimensions:
+      - name: REASON_FOR_VISIT
+        expr: REASON_FOR_VISIT
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Pneumonia check
+          - Routine lab work evaluation
+          - Diabetes management follow-up
+        description: The reason for the patient's visit to the healthcare provider, as recorded during the appointment.
+        synonyms:
+          - chief_complaint
+          - visit_purpose
+          - diagnosis
+          - patient_concern
+          - visit_reason
+          - presenting_problem
+          - medical_reason
+          - appointment_purpose
+      - name: STATUS
+        expr: STATUS
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Cancelled
+          - Completed
+          - No Show
+        description: The current status of the appointment, indicating whether it was completed as scheduled, cancelled by the patient or provider, or if the patient failed to show up.
+        synonyms:
+          - state
+          - condition
+          - situation
+          - position
+          - standing
+          - progress
+          - outcome
+          - result
+          - disposition
+      - name: NOTES
+        expr: NOTES
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Patient was seen for pneumonia check. Provider reviewed condition and adjusted treatment plan as needed.
+          - Patient was seen for routine lab work evaluation. Provider reviewed condition and adjusted treatment plan as needed.
+          - Patient was seen for diabetes management follow-up. Provider reviewed condition and adjusted treatment plan as needed.
+        description: Free text notes about th purpose and outcome of a patient's appointment.
+        synonyms:
+          - comments
+          - remarks
+          - descriptions
+          - explanations
+          - annotations
+          - summaries
+          - details
+          - additional_info
+          - extra_comments
+      - name: PATIENT_ID
+        expr: PATIENT_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '225'
+          - '191'
+          - '137'
+        description: Unique identifier for the patient who has a scheduled appointment.
+        synonyms:
+          - patient_number
+          - person_id
+          - individual_id
+          - client_id
+          - medical_record_number
+          - patient_identifier
+      - name: PROVIDER_ID
+        expr: PROVIDER_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '41'
+          - '37'
+          - '11'
+        description: The unique identifier of the healthcare provider who scheduled or will be conducting the appointment.
+        synonyms:
+          - healthcare_provider_id
+          - practitioner_id
+          - doctor_id
+          - caregiver_id
+          - medical_professional_id
+          - attending_physician_id
+          - provider_number
+    time_dimensions:
+      - name: APPOINTMENT_DATE
+        expr: APPOINTMENT_DATE
+        data_type: DATE
+        sample_values:
+          - '2024-10-11'
+          - '2024-11-26'
+          - '2025-05-27'
+        description: The date on which the appointment is scheduled to take place.
+        synonyms:
+          - appointment_timestamp
+          - scheduled_date
+          - visit_date
+          - appointment_day
+          - scheduled_appointment
+          - appointment_time
+          - date_of_visit
+          - visit_timestamp
+    facts:
+      - name: APPOINTMENT_ID
+        expr: APPOINTMENT_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '1'
+          - '2'
+          - '3'
+        description: Unique identifier for each appointment.
+        synonyms:
+          - appointment_number
+          - visit_id
+          - patient_visit_id
+          - appointment_reference
+          - schedule_id
+          - booking_id
+    primary_key:
+      columns:
+        - APPOINTMENT_ID
+    description: This table stores information about scheduled appointments between patients and healthcare providers. It captures the appointment details, including the date, reason for the visit, and current status, as well as any additional notes related to the appointment.
+    synonyms:
+      - appointments
+      - scheduled_visits
+      - patient_visits
+      - provider_appointments
+      - medical_appointments
+      - scheduled_appointments
+      - patient_schedules
+      - doctor_visits
+  - name: CLAIMS
+    base_table:
+      database: HEALTHCARE_DEMO_DB
+      schema: PUBLIC
+      table: CLAIMS
+    dimensions:
+      - name: DIAGNOSIS_CODE
+        expr: DIAGNOSIS_CODE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - J18.9
+          - R79.89
+          - E11.9
+        description: The diagnosis code assigned to the claim, as per the International Classification of Diseases (ICD) coding system, which provides a standardized way to classify and code diseases, symptoms, and procedures.
+        synonyms:
+          - diagnosis_id
+          - icd_code
+          - medical_diagnosis
+          - health_condition_code
+          - disease_code
+          - medical_condition_id
+          - diagnosis_identifier
+      - name: CLAIM_STATUS
+        expr: CLAIM_STATUS
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Submitted
+          - Processed
+          - Denied
+        description: The CLAIM_STATUS column represents the current state of a claim, indicating whether it has been submitted for review, processed and approved, or denied due to insufficient or invalid information.
+        synonyms:
+          - claim_outcome
+          - claim_resolution
+          - claim_disposition
+          - claim_result
+          - claim_decision
+          - claim_settlement_status
+          - claim_processing_status
+      - name: SERVICE_DESCRIPTION
+        expr: SERVICE_DESCRIPTION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Chest X-ray, two views
+          - Comprehensive metabolic panel
+          - Office visit, established patient, moderate complexity
+        description: A description of the medical services provided to a patient, including diagnostic tests, exams, and procedures.
+        synonyms:
+          - service_details
+          - treatment_description
+          - procedure_details
+          - medical_service_description
+          - service_rendered
+          - treatment_provided
+          - medical_procedure_description
+          - service_performed
+      - name: REASON_FOR_VISIT
+        expr: REASON_FOR_VISIT
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Pneumonia check
+          - Routine lab work evaluation
+          - Diabetes management follow-up
+        description: The reason for the patient's visit to the healthcare provider, such as a specific medical condition or routine check-up.
+        synonyms:
+          - chief_complaint
+          - visit_purpose
+          - diagnosis_reason
+          - visit_reason
+          - presenting_problem
+          - primary_diagnosis
+          - admission_reason
+          - discharge_diagnosis
+      - name: PATIENT_ID
+        expr: PATIENT_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '225'
+          - '191'
+          - '137'
+        description: Unique identifier for the patient who submitted the claim.
+        synonyms:
+          - patient_number
+          - patient_identifier
+          - patient_code
+          - individual_id
+          - person_id
+          - medical_record_number
+          - patient_key
+      - name: PROVIDER_ID
+        expr: PROVIDER_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '41'
+          - '37'
+          - '11'
+        description: A unique identifier for the healthcare provider who submitted the claim.
+        synonyms:
+          - provider_number
+          - supplier_id
+          - healthcare_provider_id
+          - practitioner_id
+          - medical_provider_id
+          - care_provider_id
+          - service_provider_id
+    time_dimensions:
+      - name: VISIT_DATE
+        expr: VISIT_DATE
+        data_type: DATE
+        sample_values:
+          - '2024-10-11'
+          - '2024-11-26'
+          - '2025-05-27'
+        description: Date of medical visit or claim submission.
+        synonyms:
+          - admission_date
+          - appointment_date
+          - consultation_date
+          - encounter_date
+          - service_date
+          - treatment_date
+          - visit_timestamp
+          - date_of_service
+          - date_of_visit
+    facts:
+      - name: CLAIM_ID
+        expr: CLAIM_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '1'
+          - '2'
+          - '3'
+        description: Unique identifier for a claim, used to distinguish one claim from another.
+        synonyms:
+          - claim_number
+          - claim_reference
+          - invoice_id
+          - bill_number
+          - transaction_id
+          - record_id
+          - case_number
+          - file_number
+      - name: PROCEDURE_CODE
+        expr: PROCEDURE_CODE
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '71020'
+          - '80053'
+          - '99214'
+        description: A code representing a medical procedure or service performed on a patient, a unique identifier used for billing and insurance purposes.
+        synonyms:
+          - treatment_code
+          - service_code
+          - medical_procedure_id
+          - procedure_id
+          - operation_code
+          - intervention_code
+          - medical_service_code
+          - procedure_identifier
+      - name: AMOUNT_BILLED
+        expr: AMOUNT_BILLED
+        data_type: NUMBER(38,2)
+        sample_values:
+          - '490.25'
+          - '383.98'
+          - '80.78'
+        description: The total amount billed to the customer for a claim.
+        synonyms:
+          - billed_amount
+          - total_charges
+          - billed_cost
+          - invoice_amount
+          - charged_amount
+          - bill_total
+          - amount_due
+      - name: AMOUNT_PAID
+        expr: AMOUNT_PAID
+        data_type: NUMBER(38,2)
+        sample_values:
+          - '354.35'
+          - '302.67'
+          - '65.39'
+        description: The total amount paid out by the insurance company for a claim.
+        synonyms:
+          - amount_covered
+          - payment_amount
+          - paid_claim_amount
+          - claim_payment
+          - reimbursement_amount
+          - paid_amount
+          - settlement_amount
+      - name: AMOUNT_PATIENT_RESPONSIBLE
+        expr: AMOUNT_PATIENT_RESPONSIBLE
+        data_type: NUMBER(38,2)
+        sample_values:
+          - '135.90'
+          - '81.31'
+          - '15.39'
+        description: The amount that the patient is responsible for paying out-of-pocket for a medical claim, after any insurance coverage or discounts have been applied.
+        synonyms:
+          - patient_balance
+          - patient_portion
+          - patient_liability
+          - patient_cost_share
+          - patient_out_of_pocket
+          - patient_copay
+          - patient_deductible
+          - patient_responsible_amount
+    primary_key:
+      columns:
+        - CLAIM_ID
+  - name: PATIENTS
+    base_table:
+      database: HEALTHCARE_DEMO_DB
+      schema: PUBLIC
+      table: PATIENTS
+    dimensions:
+      - name: FIRST_NAME
+        expr: FIRST_NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Edward
+          - Rachel
+          - Melissa
+        description: The first name of the patient.
+        synonyms:
+          - given_name
+          - first_name
+          - forename
+          - personal_name
+          - christian_name
+          - baptismal_name
+      - name: LAST_NAME
+        expr: LAST_NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Mcconnell
+          - Guzman
+          - Glass
+        description: The patient's last name.
+        synonyms:
+          - surname
+          - family_name
+          - last_name_field
+          - full_last_name
+          - patronymic
+          - family_surname
+      - name: GENDER
+        expr: GENDER
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Female
+          - Male
+        description: The gender of the patient, either Female or Male.
+        synonyms:
+          - sex
+          - male_female
+          - demographic
+          - patient_sex
+          - gender_identity
+      - name: MEMBER_ID
+        expr: MEMBER_ID
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - YxjP-55202
+          - MCFh-31617
+          - GGKH-88159
+        description: Unique identifier assigned to each patient for tracking and record-keeping purposes.
+        synonyms:
+          - member_number
+          - patient_identifier
+          - subscriber_id
+          - policy_holder_id
+          - insured_member_id
+          - client_id
+          - account_number
+      - name: INSURANCE_PLAN
+        expr: INSURANCE_PLAN
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - HMO Silver
+          - PPO Basic
+          - Medicare Advantage
+        description: The type of health insurance plan the patient is enrolled in, which determines the scope of coverage and out-of-pocket costs.
+        synonyms:
+          - health_insurance
+          - medical_coverage
+          - insurance_provider
+          - coverage_type
+          - plan_name
+          - policy_type
+          - medical_plan
+          - insurance_policy
+          - coverage_plan
+      - name: EMAIL
+        expr: EMAIL
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - ssmith@yahoo.com
+          - christopher14@gardner-chen.org
+          - oneilllinda@hotmail.com
+        description: The email address of the patient.
+        synonyms:
+          - email_address
+          - contact_email
+          - user_email
+          - electronic_mail
+          - mail_address
+          - email_id
+      - name: PHONE
+        expr: PHONE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - 001-438-512-7523x8591
+          - +1-446-301-2874x70703
+          - (202)064-1871x20165
+        description: The phone number of the patient, including area code and extension, if applicable.
+        synonyms:
+          - telephone
+          - phone_number
+          - contact_number
+          - mobile_number
+          - landline
+          - cell_phone
+          - home_phone
+          - work_phone
+      - name: ADDRESS
+        expr: ADDRESS
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - 131 Payne Roads Suite 864, Lake Matthew, MA 26315
+          - 60108 Dylan Vista, Port Samantha, AR 41420
+          - 2847 Stephanie Lodge Suite 126, Port Stacey, LA 38152
+        description: The physical location where a patient resides, including street address, city, state, and zip code.
+        synonyms:
+          - location
+          - residence
+          - mailing_address
+          - street_address
+          - physical_address
+          - home_address
+          - patient_location
+    time_dimensions:
+      - name: DOB
+        expr: DOB
+        data_type: DATE
+        sample_values:
+          - '1943-11-06'
+          - '1961-10-14'
+          - '1954-08-11'
+        description: Date of Birth of the patient.
+        synonyms:
+          - date_of_birth
+          - birth_date
+          - birthdate
+          - birthday
+          - date_of_birth_recorded
+    facts:
+      - name: PATIENT_ID
+        expr: PATIENT_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '1'
+          - '2'
+          - '3'
+        description: Unique identifier assigned to each patient in the healthcare system.
+        synonyms:
+          - patient_number
+          - person_id
+          - individual_id
+          - member_number
+          - unique_patient_identifier
+          - patient_key
+          - subject_id
+          - participant_id
+    primary_key:
+      columns:
+        - PATIENT_ID
+  - name: PRESCRIPTIONS
+    base_table:
+      database: HEALTHCARE_DEMO_DB
+      schema: PUBLIC
+      table: PRESCRIPTIONS
+    dimensions:
+      - name: MEDICATION
+        expr: MEDICATION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Lisinopril
+          - Metformin
+          - Atorvastatin
+        description: The name of the medication prescribed to the patient.
+        synonyms:
+          - drug
+          - prescription_drug
+          - medicine
+          - prescribed_medication
+          - pharmaceutical
+          - prescribed_treatment
+          - medication_name
+      - name: DOSAGE
+        expr: DOSAGE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - 10mg
+          - 40mg
+          - 20mg
+        description: The dosage of the prescribed medication, representing the amount of active ingredient per unit of the medication.
+        synonyms:
+          - amount
+          - quantity
+          - strength
+          - concentration
+          - prescribed_amount
+          - medication_quantity
+          - dose
+          - prescribed_dose
+          - dosage_level
+      - name: FREQUENCY
+        expr: FREQUENCY
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Twice daily
+          - Once daily
+        description: The frequency at which the prescribed medication should be taken by the patient.
+        synonyms:
+          - dosage_frequency
+          - dosage_schedule
+          - medication_frequency
+          - treatment_frequency
+          - administration_frequency
+          - dosage_timing
+          - repetition_rate
+          - recurrence_rate
+          - dosage_cycle
+      - name: DURATION
+        expr: DURATION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - 60 days
+          - 30 days
+        description: The length of time a patient is prescribed to take a medication, measured in days.
+        synonyms:
+          - length
+          - period
+          - term
+          - timespan
+          - span
+          - tenure
+          - interval
+          - elapsed_time
+          - time_period
+          - treatment_length
+      - name: PATIENT_ID
+        expr: PATIENT_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '191'
+          - '184'
+          - '18'
+        description: Unique identifier for the patient to whom the prescription was written.
+        synonyms:
+          - patient_number
+          - person_id
+          - individual_id
+          - subject_id
+          - medical_record_number
+          - patient_identifier
+      - name: PROVIDER_ID
+        expr: PROVIDER_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '37'
+          - '42'
+          - '7'
+        description: The unique identifier of the healthcare provider who prescribed the medication.
+        synonyms:
+          - healthcare_provider_id
+          - practitioner_id
+          - doctor_id
+          - prescriber_id
+          - medical_professional_id
+          - caregiver_id
+      - name: APPOINTMENT_ID
+        expr: APPOINTMENT_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '2'
+          - '5'
+          - '6'
+        description: Unique identifier for the appointment associated with the prescription.
+        synonyms:
+          - visit_id
+          - appointment_number
+          - patient_visit_id
+          - scheduled_visit_id
+          - consultation_id
+    facts:
+      - name: PRESCRIPTION_ID
+        expr: PRESCRIPTION_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '2'
+          - '5'
+          - '6'
+        description: Unique identifier for each prescription record.
+        synonyms:
+          - prescription_number
+          - script_id
+          - rx_id
+          - prescription_code
+          - medication_id
+          - script_number
+          - prescription_reference
+    primary_key:
+      columns:
+        - PRESCRIPTION_ID
+  - name: PROVIDERS
+    base_table:
+      database: HEALTHCARE_DEMO_DB
+      schema: PUBLIC
+      table: PROVIDERS
+    dimensions:
+      - name: NAME
+        expr: NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Sparks-Ramirez
+          - Choi, Payne and Gomez
+          - Decker-Allen
+        description: The name of the healthcare provider or medical group.
+        synonyms:
+          - full_name
+          - provider_name
+          - doctor_name
+          - physician_name
+          - practitioner_name
+          - title
+      - name: SPECIALTY
+        expr: SPECIALTY
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Primary Care
+          - Neurology
+          - Oncology
+        description: The medical specialty of the healthcare provider, indicating the specific area of medicine in which they have expertise and provide care.
+        synonyms:
+          - area_of_expertise
+          - field_of_practice
+          - medical_specialization
+          - profession
+          - area_of_practice
+          - discipline
+          - field_of_study
+      - name: LOCATION
+        expr: LOCATION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Port Gina, MN
+          - Port Traci, NJ
+          - South William, NH
+        description: The LOCATION column represents the geographical location of each provider, including the city and state where they are based.
+        synonyms:
+          - site
+          - address
+          - facility
+          - venue
+          - place
+          - office
+          - clinic
+          - hospital
+          - institution
+          - geographical_location
+      - name: PHONE
+        expr: PHONE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - +1-316-674-9567x81080
+          - (618)020-9456x0035
+          - (821)970-9797x1116
+        description: Phone numbers of healthcare providers, including area code, prefix, line number, and extension.
+        synonyms:
+          - telephone
+          - contact_number
+          - phone_number
+          - mobile_number
+          - landline
+          - contact_info
+          - dial_number
+      - name: EMAIL
+        expr: EMAIL
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - aramos@whitney.com
+          - ukemp@martin.com
+          - shannon52@thomas-hill.com
+        description: The email addresses of the healthcare providers.
+        synonyms:
+          - emai_address
+          - email_id
+          - contact_email
+          - email_contact
+          - mail_address
+          - electronic_mail
+      - name: NPI
+        expr: NPI
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '7194614225'
+          - '5816643533'
+          - '1785464108'
+        description: National Provider Identifier (NPI) is a unique 10-digit identification number assigned to covered healthcare providers by the Centers for Medicare and Medicaid Services (CMS) to standardize the identification of healthcare providers across the United States.
+        synonyms:
+          - national_provider_identifier
+          - provider_id_number
+          - unique_provider_id
+          - healthcare_provider_id
+          - national_provider_id_number
+    facts:
+      - name: PROVIDER_ID
+        expr: PROVIDER_ID
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '1'
+          - '2'
+          - '3'
+        description: Unique identifier for a healthcare provider, used to distinguish between different providers in the system.
+        synonyms:
+          - provider_key
+          - supplier_id
+          - vendor_number
+          - healthcare_provider_id
+          - practitioner_id
+          - medical_provider_number
+          - id_number
+    primary_key:
+      columns:
+        - PROVIDER_ID
+relationships:
+  - name: claims_to_patients
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: CLAIMS
+    relationship_columns:
+      - left_column: PATIENT_ID
+        right_column: PATIENT_ID
+    right_table: PATIENTS
+  - name: claims_to_providers
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: CLAIMS
+    relationship_columns:
+      - left_column: PROVIDER_ID
+        right_column: PROVIDER_ID
+    right_table: PROVIDERS
+  - name: appointments_to_patients
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: APPOINTMENTS
+    relationship_columns:
+      - left_column: PATIENT_ID
+        right_column: PATIENT_ID
+    right_table: PATIENTS
+  - name: appointments_to_providers
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: APPOINTMENTS
+    relationship_columns:
+      - left_column: PROVIDER_ID
+        right_column: PROVIDER_ID
+    right_table: PROVIDERS
+  - name: prescriptions_to_patients
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: PRESCRIPTIONS
+    relationship_columns:
+      - left_column: PATIENT_ID
+        right_column: PATIENT_ID
+    right_table: PATIENTS
+  - name: prescriptions_to_providers
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: PRESCRIPTIONS
+    relationship_columns:
+      - left_column: PROVIDER_ID
+        right_column: PROVIDER_ID
+    right_table: PROVIDERS
+  - name: prescriptions_to_appointments
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: PRESCRIPTIONS
+    relationship_columns:
+      - left_column: APPOINTMENT_ID
+        right_column: APPOINTMENT_ID
+    right_table: APPOINTMENTS
+  - name: appointments_to_claims
+    join_type: inner
+    relationship_type: one_to_one
+    left_table: APPOINTMENTS
+    relationship_columns:
+      - left_column: APPOINTMENT_ID
+        right_column: CLAIM_ID
+    right_table: CLAIMS
+verified_queries:
+  - name: Distinct prescription count
+    question: What is the total count of prescriptions for Metformin medication?
+    use_as_onboarding_question: false
+    sql: SELECT MIN(appointment_id) AS start_appointment_id, MAX(appointment_id) AS end_appointment_id, COUNT(*) AS total_metformin_prescriptions FROM prescriptions WHERE medication = 'Metformin'
+    verified_by: Bracken Eddy
+    verified_at: 1750197579
+  - name: How many providers in VA
+    question: How many providers are located in the state Virginia?
+    use_as_onboarding_question: false
+    sql: SELECT COUNT(DISTINCT provider_id) AS num_providers FROM providers WHERE location LIKE '%, VA' OR location LIKE '%, Virginia'
+    verified_by: Bracken Eddy
+    verified_at: 1750197719
+  - name: patient address
+    question: What is the address of the patient Edward Mcconnell?
+    use_as_onboarding_question: false
+    sql: SELECT address FROM patients WHERE first_name = 'Edward' AND last_name = 'Mcconnell'
+    verified_by: Bracken Eddy
+    verified_at: 1750197801
+  - name: join of claims and patients
+    question: What is the first and last name of the patient who has claim ID 123?
+    use_as_onboarding_question: false
+    sql: SELECT p.first_name, p.last_name FROM claims AS c INNER JOIN patients AS p ON c.patient_id = p.patient_id WHERE c.claim_id = 123
+    verified_by: Bracken Eddy
+    verified_at: 1750200477
