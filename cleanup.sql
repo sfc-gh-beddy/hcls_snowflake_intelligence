@@ -17,6 +17,8 @@ DROP DATABASE IF EXISTS SNOWFLAKE_INTELLIGENCE;
 DROP WAREHOUSE IF EXISTS SNOWFLAKE_INTELLIGENCE_WH;
 DROP SCHEMA IF EXISTS SNOWFLAKE_INTELLIGENCE.AGENTS;
 DROP ROLE IF EXISTS SNOWFLAKE_INTELLIGENCE_ADMIN_RL;
+-- if created semantic view
+DROP SEMANTIC VIEW IF EXISTS healthcare_demo_semantic_vw;
 
 -- NOTE: Drop Semantic Models & Cortex Agents manually
 -- These currently require manual removal via Snowsight UI:
