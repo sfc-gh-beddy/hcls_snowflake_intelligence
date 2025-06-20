@@ -39,6 +39,8 @@ Go to Snowsight → **Semantic Models** → upload `healthcare_data.yaml`.
 
 This connects your structured healthcare data to Cortex.
 
+**Note: Have include sql to create semantic VIEW, if would rather demo that.**
+
 ---
 
 ### 5️⃣ **Create the Cortex Agent**
